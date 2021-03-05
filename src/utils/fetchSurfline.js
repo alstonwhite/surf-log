@@ -52,7 +52,7 @@ export const fetchForecast = async (locationId, start, end) => {
     }
   };
   // 3599 unix = 59 min 59 sec --> captures previous and next hour in forecast from session times
-  console.log(tideData)
-  console.log(forecast);
+  // console.log(tideData)
+  // console.log(forecast);
   return forecast;
 }

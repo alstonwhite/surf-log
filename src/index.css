@@ -15,3 +15,94 @@ code {
 .App {
   text-align: center;
 }
+
+.add-session-form {
+  border: 2px solid red;
+
+  margin: auto;
+  width: 85%;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.add-session-form__title {
+  width: 100%;
+}
+
+.add-session-form__body {
+  width: 100%;
+
+  display: grid;
+  grid-template-areas: 
+      "spot-label spot . . notes"
+      "tstart-label tstart tend-label tend notes"
+      "board-label board . . notes"
+      ". . . . notes"
+      "addbtn addbtn sendbtn sendbtn ."
+    ;
+  grid-template-columns: 100px 100px 100px 100px 1fr;
+  grid-template-rows: 20px 20px 20px 20px 20px;
+  grid-gap: 10px 10px;
+}
+ 
+.add-session-form__spot-label {
+  width: 100%;
+  grid-area: spot-label;
+}
+
+.add-session-form__spot {
+  width: 100%;
+  grid-area: spot;
+}
+
+.add-session-form__start-time-label {
+  width: 100%;
+  grid-area: tstart-label;
+}
+
+.add-session-form__start-time {
+  width: 100%;
+  grid-area: tstart;
+}
+
+.add-session-form__end-time-label {
+  width: 100%;
+  grid-area: tend-label;
+}
+
+.add-session-form__end-time {
+  width: 100%;
+  grid-area: tend;
+}
+
+.add-session-form__board-label {
+  width: 100%;
+  grid-area: board-label;
+}
+
+.add-session-form__board {
+  width: 100%;
+  grid-area: board;
+}
+
+.add-session-form__add-btn {
+  width: 100%;
+  grid-area: addbtn;
+} 
+
+.add-session-form__send-btn {
+  width: 100%;
+  grid-area: sendbtn;
+} 
+
+.add-session-form__notes {
+  grid-area: notes;
+
+  max-width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+  outline: none;
+  resize: none;
+} 

@@ -10,7 +10,7 @@ const sessions = [
             },
             wave: [
                 {
-                    surf: {min: 3.54, min: 2.53, optimatlScore: 2},
+                    surf: {max: 3.54, min: 2.53, optimatlScore: 2},
                     swells: [{direction: 60.47, directionMin: 60.47, height: 0.98, optimalScore: 0, period: 8}],
                     timestamp: 1614056400
                 }
