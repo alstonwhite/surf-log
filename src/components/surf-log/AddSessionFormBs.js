@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import firebase from '../../utils/firebase'
 import 'firebase/database'
 import { Container, Accordion, Card, Form, Col, Button, Alert } from 'react-bootstrap'
+import { auth } from '../../utils/firebase'
 
 import { fetchForecast } from '../../utils/fetchSurfline'
 
@@ -36,8 +37,8 @@ const AddSessionFormBs = () => {
     const endTimeRef = useRef()
     const ratingRef = useRef()
     const notesRef = useRef()
-    
 
+    const uid = auth.currentUser.uid
 
 
     const timeConvert = (timeStr) => {
@@ -49,7 +50,7 @@ const AddSessionFormBs = () => {
         const dataRef = firebase.database()
         if (data) {
             console.log('session saved')
-            dataRef.ref('sessions/').push(data);
+            dataRef.ref(`${uid}/sessions`).push(data);
         } else {
             console.log('no data')
         }

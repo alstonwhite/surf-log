@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }) => {
             setCurrentUser(user)
             setLoading(false)
         })
-        // if (auth.currentUser) { console.log(auth.currentUser.uid)}
         return unsubscribe
     }, [])
   

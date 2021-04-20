@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import firebase from '../../utils/firebase'
 import 'firebase/database'
 import { Container } from 'react-bootstrap'
+import { auth } from '../../utils/firebase'
+
 
 import LogEntry from './LogEntry'; 
 
@@ -9,9 +11,10 @@ const SessionLog = () => {
 
     const [sessionLogData, setSessionLogData] = useState(null);
     // const [sessionsLoaded, setSessionsLoaded] = useState(10);
+    const uid = auth.currentUser.uid
 
     const checkData = () => {
-        firebase.database().ref('sessions/').on('value', snapshot => {
+        firebase.database().ref(`${uid}/sessions/`).on('value', snapshot => {
             if (snapshot.exists()) {
                 console.log('data found:');
                 console.log(Object.values(snapshot.val()));
