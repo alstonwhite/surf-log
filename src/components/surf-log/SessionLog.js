@@ -16,12 +16,12 @@ const SessionLog = () => {
     const checkData = () => {
         firebase.database().ref(`${uid}/sessions/`).on('value', snapshot => {
             if (snapshot.exists()) {
-                console.log('data found:');
+                console.log('Session data found:');
                 console.log(Object.values(snapshot.val()));
                 setSessionLogData(Object.values(snapshot.val()))
             }
             else {
-                console.log('no data found');
+                console.log('No session data found in Firebase');
             }
         })
     }

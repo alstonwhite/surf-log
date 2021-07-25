@@ -52,7 +52,7 @@ const AddSessionFormBs = () => {
             console.log('session saved')
             dataRef.ref(`${uid}/sessions`).push(data);
         } else {
-            console.log('no data')
+            console.log('Unable to add session data to Firebase')
         }
     }
 

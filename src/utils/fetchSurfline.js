@@ -16,7 +16,7 @@ export const fetchLocation = async (locationId) => {
           }
       }
     ));
-    console.log(location)
+    // console.log(location)
     return location;
 }
 
