@@ -1,23 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import firebase from '../../utils/firebase'
 import 'firebase/database'
 import { Container, Accordion, Card, Form, Col, Button, Alert } from 'react-bootstrap'
 import { auth } from '../../utils/firebase'
 
 import { fetchForecast } from '../../utils/fetchSurfline'
-
-const spots = [
-    {name: "18th St. AB", id: "5842041f4e65fad6a7708a8c"},
-    {name: "Jax Beach Pier", id: "5842041f4e65fad6a7708aa0"},
-    {name: "90th St. Rockaway", id: "5842041f4e65fad6a7708852"},
-    {name: "Ponce Inlet", id: "5842041f4e65fad6a7708a9d"},
-    {name: "Ditch Plains", id: "5842041f4e65fad6a77089ec"},
-]
-
-const boards = [
-    {name: "Bing Dharma", id: 1},
-    {name: "Ken White", id: 2}
-]
 
 const times = [
                 "00:00","00:30","01:00","01:30","02:00","02:30","03:00","03:30","04:00","04:30","05:00","05:30",
@@ -28,6 +15,8 @@ const times = [
 
 const AddSessionFormBs = () => {
 
+    const [spotData, setSpotData] = useState(null)
+    const [boardData, setBoardData] = useState(null)
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
@@ -46,6 +35,29 @@ const AddSessionFormBs = () => {
         return Math.floor(new Date(current.toString().slice(0,16) + timeStr + ":00"+ current.toString().slice(24)).getTime()/1000);
     }
 
+    const checkData = () => {
+        firebase.database().ref(`${uid}/spots/`).on('value', snapshot => {
+            if (snapshot.exists()) {
+                console.log('Spot data found:');
+                console.log(Object.values(snapshot.val()));
+                setSpotData(Object.values(snapshot.val()))
+            }
+            else {
+                console.log('No spot data found in Firebase');
+            }
+        })
+        firebase.database().ref(`${uid}/boards/`).on('value', snapshot => {
+            if (snapshot.exists()) {
+                console.log('Board data found:');
+                console.log(Object.values(snapshot.val()));
+                setBoardData(Object.values(snapshot.val()))
+            }
+            else {
+                console.log('No board data found in Firebase');
+            }
+        })
+    }
+
     const sendData = (data) => {
         const dataRef = firebase.database()
         if (data) {
@@ -55,13 +67,17 @@ const AddSessionFormBs = () => {
             console.log('Unable to add session data to Firebase')
         }
     }
+    
+    useEffect(() => {
+        checkData();
+      }, []);
 
     async function handleSubmit(e) {
         e.preventDefault()
 
         let inputs = {
-            spot: spots.find(entry => entry.id === spotRef.current.value),
-            board: boards.find(entry => entry.id === parseInt(boardRef.current.value)),
+            spot: spotData.find(entry => entry.id === spotRef.current.value),
+            board: boardData.find(entry => entry.id === parseInt(boardRef.current.value)),
             startTime: {time: startTimeRef.current.value, timestamp: timeConvert(startTimeRef.current.value)},
             endTime: {time: endTimeRef.current.value, timestamp: timeConvert(endTimeRef.current.value)},
             rating: ratingRef.current.value,
@@ -104,14 +120,16 @@ const AddSessionFormBs = () => {
                                     <Form.Label size="sm">Spot:</Form.Label>
                                     <Form.Control type="spot" ref={spotRef} as="select" size="sm">
                                         <option value="" disabled selected>Select spot</option>
-                                        {spots.map(spot => <option key={spot.id} value={spot.id}>{spot.name}</option>)}
+                                        {spotData ? spotData.map(spot => <option key={spot.id} value={spot.id}>{spot.name}</option>) :
+                                        <option value="" disabled>No current spots</option>}
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formGridBoard">
                                     <Form.Label size="sm">Board:</Form.Label>
                                     <Form.Control type="board" ref={boardRef} as="select" size="sm">
                                         <option value="" disabled selected>Select board</option>
-                                        {boards.map(board => <option key={board.id} value={board.id}>{board.name}</option>)}
+                                        {boardData ? boardData.map(board => <option key={board.id} value={board.id}>{board.name}</option>) :
+                                        <option value="" disabled>No current board</option>}
                                     </Form.Control>
                                 </Form.Group>
                             </Form.Row>
@@ -148,6 +166,7 @@ const AddSessionFormBs = () => {
                     <Alert variant="success" show={show}>
                         Session added
                     </Alert>
+                    {error && <Alert variant="danger">{error}</Alert>}
                 </Container>
             </Accordion>
         </>

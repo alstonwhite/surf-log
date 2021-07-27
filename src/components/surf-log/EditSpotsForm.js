@@ -12,7 +12,6 @@ const EditSpotsForm = () => {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
-    const spotNameRef = useRef()
     const spotIdRef = useRef()
 
 
