@@ -15,15 +15,6 @@ import UpdateProfile from './components/UpdateProfile'
 import PrivateRoute from './components/PrivateRoute'
 import SurfLogContainer from './components/surf-log/SurfLogContainer';
 
-
-const spots = [
-  {name: "18th St. AB", id: "5842041f4e65fad6a7708a8c"},
-  {name: "Jax Beach Pier", id: "5842041f4e65fad6a7708aa0"},
-  {name: "90th St. Rockaway", id: "5842041f4e65fad6a7708852"},
-  {name: "Ponce Inlet", id: "5842041f4e65fad6a7708a9d"},
-  {name: "Ditch Plains", id: "5842041f4e65fad6a77089ec"},
-]
-
 function App() {
 
   return (
