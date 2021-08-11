@@ -29,7 +29,7 @@ const EditBoardsForm = () => {
 
     useEffect(() => {
         checkData();
-      }, []);
+      });
 
     const uid = auth.currentUser.uid
 

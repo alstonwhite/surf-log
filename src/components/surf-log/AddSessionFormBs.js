@@ -70,7 +70,7 @@ const AddSessionFormBs = () => {
     
     useEffect(() => {
         checkData();
-      }, []);
+      });
 
     async function handleSubmit(e) {
         e.preventDefault()

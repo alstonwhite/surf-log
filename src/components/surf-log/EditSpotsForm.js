@@ -30,7 +30,7 @@ const EditSpotsForm = () => {
 
     useEffect(() => {
         checkData();
-      }, []);
+      });
 
     const uid = auth.currentUser.uid
 
