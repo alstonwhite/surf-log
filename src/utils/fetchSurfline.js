@@ -1,7 +1,6 @@
 export const fetchLocation = async (locationId) => {
   const location = await fetch(`http://services.surfline.com/taxonomy?type=spot&id=${locationId}`)
     .then(response => response.json())
-    // .then(data => console.log(data))
     .then(data => (
       {
         id: data.spot, 
@@ -16,7 +15,6 @@ export const fetchLocation = async (locationId) => {
           }
       }
     ));
-    // console.log(location)
     return location;
 }
 
@@ -52,7 +50,5 @@ export const fetchForecast = async (locationId, start, end) => {
     }
   };
   // 3599 unix = 59 min 59 sec --> captures previous and next hour in forecast from session times
-  // console.log(tideData)
-  // console.log(forecast);
   return forecast;
 }

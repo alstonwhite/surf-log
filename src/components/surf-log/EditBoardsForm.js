@@ -28,6 +28,7 @@ const EditBoardsForm = () => {
     }
 
     useEffect(() => {
+        // keeps looping?
         checkData();
       });
 

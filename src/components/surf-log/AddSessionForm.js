@@ -20,6 +20,7 @@ const AddSessionForm = () => {
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [show, setShow] = useState(false);
+    // update form management -- state instead of refs? one formState object with useState
     const spotRef = useRef()
     const boardRef = useRef()
     const startTimeRef = useRef()
@@ -87,7 +88,9 @@ const AddSessionForm = () => {
         try {
             setError("")
             setLoading(true)
-            fetchForecast(inputs.spot.id, inputs.startTime.timestamp, inputs.endTime.timestamp).then(data => sendData({...data, entry: inputs}))
+            let forecastData = await fetchForecast(inputs.spot.id, inputs.startTime.timestamp, inputs.endTime.timestamp)
+            // how to ensure sendData success?
+            sendData({...forecastData, entry: inputs})
             spotRef.current.value="";
             boardRef.current.value="";
             startTimeRef.current.value="";
@@ -99,7 +102,6 @@ const AddSessionForm = () => {
           } catch(err) {
             setError("Failed to add session", err)
           }
-      
           setLoading(false)
     }
 
