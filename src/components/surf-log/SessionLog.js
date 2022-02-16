@@ -28,7 +28,7 @@ const SessionLog = () => {
 
     useEffect(() => {
         checkData();
-      });
+      }, []);
 
 
     return (

@@ -71,7 +71,7 @@ const AddSessionForm = () => {
     
     useEffect(() => {
         checkData();
-      });
+      }, []);
 
     async function handleSubmit(e) {
         e.preventDefault()
