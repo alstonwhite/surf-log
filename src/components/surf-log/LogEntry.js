@@ -95,8 +95,8 @@ const LogEntry = ({session}) => {
                           </tr>
                       </thead>
                       <tbody>
-                          {formatSessionData(session.session).map(data =>
-                              <tr>
+                          {formatSessionData(session.session).map((data, idx) =>
+                              <tr key={idx}>
                                   <td>{new Date(data.timestamp*1000).toString().slice(16,21)}</td>
                                   <td>{`${Math.floor(data.wave.surf.min)} - ${Math.floor(data.wave.surf.max)} ft`}</td>
                                   <td>{`${data.wave.swells[0].height}ft - ${data.wave.swells[0].period}s - ${degToDir(data.wave.swells[0].direction)}`}</td>
@@ -110,15 +110,15 @@ const LogEntry = ({session}) => {
                   <Table bordered size="sm">
                       <thead>
                           <tr>
-                            {formatDayData(session.day).map(data =>
-                              <th>{data.type.charAt(0)+data.type.substring(1).toLowerCase()}</th>
+                            {formatDayData(session.day).map((data, idx) =>
+                              <th key={idx}>{data.type.charAt(0)+data.type.substring(1).toLowerCase()}</th>
                             )}
                           </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          {formatDayData(session.day).map(data =>
-                            <td>{new Date(data.timestamp*1000).toString().slice(16,21)}</td>
+                          {formatDayData(session.day).map((data, idx) =>
+                            <td key={idx}>{new Date(data.timestamp*1000).toString().slice(16,21)}</td>
                           )}
                         </tr>
                       </tbody>
