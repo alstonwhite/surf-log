@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../utils/firebase";
-import "firebase/database";
 import { Container } from "react-bootstrap";
-import { auth } from "../../utils/firebase";
+import { auth, database } from "../../utils/firebase";
 
 import LogEntry from "./LogEntry";
 
@@ -12,8 +10,7 @@ const SessionLog = () => {
 
   useEffect(() => {
     const checkData = () => {
-      firebase
-        .database()
+      database
         .ref(`${uid}/sessions/`)
         .on("value", (snapshot) => {
           if (snapshot.exists()) {

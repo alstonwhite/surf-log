@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import firebase from "../../utils/firebase";
-import "firebase/database";
 import {
   Container,
   Accordion,
@@ -12,7 +10,7 @@ import {
   Alert,
   ListGroupItem,
 } from "react-bootstrap";
-import { auth } from "../../utils/firebase";
+import { auth, database } from "../../utils/firebase";
 
 import { fetchLocation } from "../../utils/fetchSurfline";
 
@@ -27,8 +25,7 @@ const EditSpotsForm = () => {
 
   useEffect(() => {
     const checkData = () => {
-      firebase
-        .database()
+      database
         .ref(`${uid}/spots/`)
         .on("value", (snapshot) => {
           if (snapshot.exists()) {
@@ -44,7 +41,7 @@ const EditSpotsForm = () => {
   }, [uid]);
 
   const sendData = (data) => {
-    const dataRef = firebase.database();
+    const dataRef = database;
     if (data) {
       console.log("session saved");
       dataRef.ref(`${uid}/spots`).push(data);

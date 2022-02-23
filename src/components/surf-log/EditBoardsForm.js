@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import firebase from "../../utils/firebase";
-import "firebase/database";
 import {
   Container,
   Accordion,
@@ -12,7 +10,7 @@ import {
   Alert,
   ListGroupItem,
 } from "react-bootstrap";
-import { auth } from "../../utils/firebase";
+import { auth, database } from "../../utils/firebase";
 
 const EditBoardsForm = () => {
   const [data, setData] = useState(null);
@@ -25,8 +23,7 @@ const EditBoardsForm = () => {
 
   useEffect(() => {
     const checkData = () => {
-      firebase
-        .database()
+      database
         .ref(`${uid}/boards/`)
         .on("value", (snapshot) => {
           if (snapshot.exists()) {
@@ -42,7 +39,7 @@ const EditBoardsForm = () => {
   }, [uid]);
 
   const sendData = (data) => {
-    const dataRef = firebase.database();
+    const dataRef = database;
     if (data) {
       console.log("session saved");
       dataRef.ref(`${uid}/boards`).push(data);
