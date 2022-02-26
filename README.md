@@ -1,6 +1,7 @@
 # surf log
 
-This is a web app that allows a user to track their surfing sessions and keep detailed recordings of location, swell size and direction, wind speed and direction, surf size, condition notes and obeservations, board used, and any other notes. Users create a custom profile with their favorite spots and boards, and can view all previous entries.\
+This is a web app that allows a user to track their surfing sessions and keep detailed recordings of location, swell size and direction, wind speed and direction, surf size, condition notes and obeservations, board used, and any other notes. Users create a custom profile with their favorite spots and boards, and can view all previous entries.
+
 App implements Firebase Authorization and Realtime Database. All conditions and weather data pulled into each session log automatically from the Surfline public API
 
 ## Deployed Site
@@ -16,7 +17,7 @@ git clone https://github.com/alstonwhite/surf-log
 npm install
 ```
 
-In the project directory, you can run the following script:
+In the project directory, you can run the following scripts:
 
 ### `npm start`
 
