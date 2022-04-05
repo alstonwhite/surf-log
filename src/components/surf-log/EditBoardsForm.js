@@ -41,7 +41,7 @@ const EditBoardsForm = () => {
   const sendData = (data) => {
     const dataRef = database;
     if (data) {
-      console.log("session saved");
+      console.log("Board data saved");
       dataRef.ref(`${uid}/boards`).push(data);
     } else {
       console.log("Unable to add board data to Firebase");
