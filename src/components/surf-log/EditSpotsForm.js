@@ -43,7 +43,7 @@ const EditSpotsForm = () => {
   const sendData = (data) => {
     const dataRef = database;
     if (data) {
-      console.log("session saved");
+      console.log("Spot data saved");
       dataRef.ref(`${uid}/spots`).push(data);
     } else {
       console.log("Unable to add spot data to Firebase");
